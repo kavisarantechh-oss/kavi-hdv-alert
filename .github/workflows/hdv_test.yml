@@ -1,0 +1,23 @@
+name: HDV Test
+
+on:
+  workflow_dispatch:
+
+jobs:
+  hdv-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+
+      - name: Run HDV checker
+        env:
+          TWELVE_DATA_API_KEY: ${{ secrets.TWELVE_DATA_API_KEY }}
+          TEST_DATE_IST: "2026-09-16"
+        run: python hdv_checker.py
