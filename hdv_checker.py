@@ -8,9 +8,11 @@ from datetime import datetime, timezone, timedelta
 SYMBOL = "EUR/USD"
 INTERVAL = "5min"
 OUTPUTSIZE = 5000
-TEST_DATE_IST = os.getenv("TEST_DATE_IST", "2026-09-01")
-API_KEY = os.environ["TWELVE_DATA_API_KEY"]
+
 IST = timezone(timedelta(hours=5, minutes=30))
+TEST_DATE_IST = os.getenv("TEST_DATE_IST", datetime.now(IST).strftime("%Y-%m-%d"))
+
+API_KEY = os.environ["TWELVE_DATA_API_KEY"]
 
 def fetch_candles():
     params = {
