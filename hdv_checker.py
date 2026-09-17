@@ -204,11 +204,19 @@ def main():
     print("Candles fetched:", len(candles))
     print("=" * 72)
 
-    found = []
-    for s in signals:
-        ist = utc_to_ist(s["utc"])
-        if ist.date() == target:
-            found.append((s, ist))
+    # Trading day: 02:30 IST to next day 02:25 IST
+start_dt = datetime.strptime(
+    TEST_DATE_IST + " 02:30",
+    "%Y-%m-%d %H:%M"
+).replace(tzinfo=IST)
+
+end_dt = start_dt + timedelta(days=1) - timedelta(minutes=5)
+
+found = []
+for s in signals:
+    ist = utc_to_ist(s["utc"])
+    if start_dt <= ist <= end_dt:
+        found.append((s, ist))
 
     print("Signals found:", len(found))
     for n, (s, ist) in enumerate(found, 1):
