@@ -19,5 +19,5 @@ jobs:
       - name: Run HDV checker
         env:
           TWELVE_DATA_API_KEY: ${{ secrets.TWELVE_DATA_API_KEY }}
-          TEST_DATE_IST: "2026-09-15"
+          TEST_DATE_IST: "2026-09-01"
         run: python hdv_checker.py
