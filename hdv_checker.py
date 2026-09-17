@@ -194,6 +194,10 @@ def utc_to_ist(text):
 
 def main():
     candles = fetch_candles()
+
+    print("First candle:", candles[0]["datetime"])
+    print("Last candle:", candles[-1]["datetime"])
+    
     signals = calculate_hdv(candles)
     target = datetime.strptime(TEST_DATE_IST, "%Y-%m-%d").date()
 
